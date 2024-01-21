@@ -19,15 +19,23 @@ public class LateFee {
         return new LateFee(point);
     }
 
-    public LateFee addPoint(long point) {
+    public LateFee accumulate(long point) {
         return new LateFee(this.point + point);
     }
 
-    public LateFee removePoint(long point) {
-        if (point > this.point) {
-            throw new IllegalStateException("보유한 포인트보다 커서 차감할 수 없습니다.");
+    public long getRemainingPointsAfterDeduction(long deductedPoint) {
+        if (deductedPoint <= this.point) {
+            return 0;
         }
 
+        return deductedPoint - this.point;
+    }
+
+    public LateFee deduct(long point) {
         return new LateFee(this.point - point);
+    }
+
+    public boolean isEmpty() {
+        return point == 0;
     }
 }

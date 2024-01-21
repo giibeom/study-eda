@@ -1,10 +1,10 @@
-package com.msa.rental.domain.model.vo;
+package com.msa.rental.unit;
 
+import com.msa.rental.domain.model.vo.LateFee;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LateFeeTest {
 
@@ -13,23 +13,22 @@ class LateFeeTest {
     void addPoint() {
         LateFee lateFee = LateFee.create(1000);
 
-        assertThat(lateFee.addPoint(1000)).isEqualTo(LateFee.create(2000));
+        assertThat(lateFee.accumulate(1000)).isEqualTo(LateFee.create(2000));
     }
 
     @Test
     @DisplayName("1000 연체 포인트에서 500 포인트를 차감할 경우, 500포인트로 반환한다.")
-    void validRemovePoint() {
+    void removePoint() {
         LateFee lateFee = LateFee.create(1000);
 
-        assertThat(lateFee.removePoint(500)).isEqualTo(LateFee.create(500));
+        assertThat(lateFee.deduct(500)).isEqualTo(LateFee.create(500));
     }
 
     @Test
-    @DisplayName("기존 연체 포인트 이상의 포인트를 차감하려고 할 경우, 예외가 발생한다.")
-    void invalidRemovePoint() {
+    @DisplayName("1000 연체 포인트에서 1500 포인트를 차감 후 남은 포인트는 500포인트를 반환한다.")
+    void getRemainingPointsAfterDeduction() {
         LateFee lateFee = LateFee.create(1000);
 
-        assertThatThrownBy(() -> lateFee.removePoint(2000))
-                .isInstanceOf(IllegalStateException.class);
+        assertThat(lateFee.getRemainingPointsAfterDeduction(1500)).isEqualTo(500);
     }
 }

@@ -1,5 +1,6 @@
-package com.msa.rental.domain.model.vo;
+package com.msa.rental.unit;
 
+import com.msa.rental.domain.model.vo.RentalCardNo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
