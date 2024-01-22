@@ -2,7 +2,9 @@ package com.msa.rental.domain.model.vo;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
+@Getter
 @EqualsAndHashCode
 public class IDName {
 

@@ -19,6 +19,7 @@ public class RentalItem {
 
     private LocalDate lateStartDate;
 
+    @Getter
     private boolean overDued;
 
     @Getter

@@ -20,8 +20,10 @@ public class RentalCard {
 
     private static final int POINTS_PER_DELAYED_DAY = 10;
 
+    @Getter
     private RentalCardNo rentalCardNo;
 
+    @Getter
     private IDName member;
 
     @Getter
@@ -130,5 +132,19 @@ public class RentalCard {
 
     public boolean isExistRentalItem(Item item) {
         return rentalItems.stream().anyMatch(it -> it.getItem().equals(item));
+    }
+
+    public long getRentalItemSize() {
+        return rentalItems.size();
+    }
+
+    public long getReturnedItemSize() {
+        return returnedItems.size();
+    }
+
+    public long getOverdueItemSize() {
+        return rentalItems.stream()
+                .filter(RentalItem::isOverDued)
+                .count();
     }
 }
