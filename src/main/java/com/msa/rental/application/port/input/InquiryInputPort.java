@@ -6,7 +6,6 @@ import com.msa.rental.domain.model.RentalCard;
 import com.msa.rental.framework.web.dto.RentItemOutputDTO;
 import com.msa.rental.framework.web.dto.RentalCardOutputDTO;
 import com.msa.rental.framework.web.dto.ReturnItemOutputDTO;
-import com.msa.rental.framework.web.dto.UserInputDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,15 +20,15 @@ public class InquiryInputPort implements InquiryUsecase {
 
     private final RentalCardOutputPort rentalCardOutputPort;
 
-    public RentalCardOutputDTO getRentalCard(UserInputDTO userInputDTO) {
-        RentalCard rentalCard = rentalCardOutputPort.findByUserId(userInputDTO.getUserId())
+    public RentalCardOutputDTO getRentalCard(String userId) {
+        RentalCard rentalCard = rentalCardOutputPort.findByUserId(userId)
                 .orElseThrow(() -> new IllegalStateException("대여카드가 존재하지 않습니다."));
 
         return RentalCardOutputDTO.of(rentalCard);
     }
 
-    public List<RentItemOutputDTO> getAllRentItem(UserInputDTO userInputDTO) {
-        RentalCard rentalCard = rentalCardOutputPort.findByUserId(userInputDTO.getUserId())
+    public List<RentItemOutputDTO> getAllRentItem(String userId) {
+        RentalCard rentalCard = rentalCardOutputPort.findByUserId(userId)
                 .orElseThrow(() -> new IllegalStateException("대여카드가 존재하지 않습니다."));
 
         return rentalCard.getRentalItems().stream()
@@ -37,8 +36,8 @@ public class InquiryInputPort implements InquiryUsecase {
                 .collect(Collectors.toList());
     }
 
-    public List<ReturnItemOutputDTO> getAllReturnItem(UserInputDTO userInputDTO) {
-        RentalCard rentalCard = rentalCardOutputPort.findByUserId(userInputDTO.getUserId())
+    public List<ReturnItemOutputDTO> getAllReturnItem(String userId) {
+        RentalCard rentalCard = rentalCardOutputPort.findByUserId(userId)
                 .orElseThrow(() -> new IllegalStateException("대여카드가 존재하지 않습니다."));
 
         return rentalCard.getReturnedItems().stream()
