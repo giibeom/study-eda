@@ -15,8 +15,10 @@ public class RentalItem {
     @Getter
     private Item item;
 
+    @Getter
     private LocalDate rentalDate;
 
+    @Getter
     private LocalDate lateStartDate;
 
     @Getter
@@ -43,6 +45,16 @@ public class RentalItem {
                 .rentalDate(LocalDate.now())
                 .overDued(false)
                 .overDueDate(LocalDate.now().plusDays(DEFAULT_RENTAL_PERIOD))
+                .build();
+    }
+
+    public static RentalItem copy(RentalItem original) {
+        return RentalItem.builder()
+                .item(original.getItem())
+                .rentalDate(original.getRentalDate())
+                .lateStartDate(original.getLateStartDate())
+                .overDued(original.isOverDued())
+                .overDueDate(original.getOverDueDate())
                 .build();
     }
 

@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static lombok.AccessLevel.PRIVATE;
 
@@ -34,6 +35,7 @@ public class RentalCard {
 
     private final List<RentalItem> rentalItems = new ArrayList<>();
 
+    @Getter
     private final List<ReturnedItem> returnedItems = new ArrayList<>();
 
     @Builder(access = PRIVATE)
@@ -118,6 +120,23 @@ public class RentalCard {
         return pointsAfterDeduction;
     }
 
+    public long makeAvailableRental(long point) {
+        if (!rentalItems.isEmpty()) {
+            throw new IllegalArgumentException("모든 도서가 반납되어야 정지를 해제할 수 있습니다.");
+        }
+
+        if (this.getLateFee().getPoint() != point) {
+            throw new IllegalArgumentException("해당 포인트로 연체를 해제할 수 없습니다.");
+        }
+
+        this.lateFee = lateFee.deduct(point);
+        if (lateFee.isEmpty()) {
+            rentalStatus = RentalStatus.RENTAL_ABLE;
+        }
+
+        return lateFee.getPoint();
+    }
+
     // 원래는 배치 등을 활용하여 연체 여부를 계산해야되지만, 쉬운 예제를 위해 억지로 연체 처리 되는 메서드를 만듬
     public void overdueItem(Item item) {
         RentalItem rentalItem = rentalItems.stream()
@@ -134,12 +153,10 @@ public class RentalCard {
         return rentalItems.stream().anyMatch(it -> it.getItem().equals(item));
     }
 
-    public long getRentalItemSize() {
-        return rentalItems.size();
-    }
-
-    public long getReturnedItemSize() {
-        return returnedItems.size();
+    public List<RentalItem> getRentalItems() {
+        return rentalItems.stream()
+                .map(RentalItem::copy)
+                .collect(Collectors.toList());
     }
 
     public long getOverdueItemSize() {

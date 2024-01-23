@@ -2,7 +2,9 @@ package com.msa.rental.domain.model.vo;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
+@Getter
 @EqualsAndHashCode
 public class Item {
 
@@ -10,7 +12,7 @@ public class Item {
     private final String title;
 
     @Builder
-    private Item(int no, String title) {
+    public Item(int no, String title) {
         this.no = no;
         this.title = title;
     }

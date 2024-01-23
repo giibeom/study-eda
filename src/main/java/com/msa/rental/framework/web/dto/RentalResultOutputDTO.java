@@ -25,7 +25,7 @@ public class RentalResultOutputDTO {
         return RentalResultOutputDTO.builder()
                 .userId(rentalCard.getMember().getId())
                 .userNm(rentalCard.getMember().getName())
-                .rentedCount(rentalCard.getRentalItemSize())
+                .rentedCount(rentalCard.getRentalItems().size())
                 .totalLateFee(rentalCard.getLateFee().getPoint())
                 .build();
     }

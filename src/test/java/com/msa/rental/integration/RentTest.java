@@ -35,7 +35,7 @@ public class RentTest {
         @Nested
         @DisplayNameGeneration(ReplaceUnderscores.class)
         class 대여카드와_도서샘플_2개가_주어지고_주어진_도서들을_대여할_때 {
-            RentalCard 기범_카드 = RentalCard.create(IDName.builder().id("1").name("기범").build());
+            RentalCard 기범_카드 = RentalCard.create(new IDName("1", "기범"));
             Item 도서1 = Item.builder().no(1).title("도서1").build();
             Item 도서2 = Item.builder().no(2).title("도서2").build();
 

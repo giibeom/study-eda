@@ -40,8 +40,8 @@ public class RentalCardOutputDTO {
                 .memberName(rental.getMember().getName())
                 .rentStatus(rental.getRentalStatus().name())
                 .totalLateFee(rental.getLateFee().getPoint())
-                .totalRentalCnt(rental.getRentalItemSize())
-                .totalReturnCnt(rental.getReturnedItemSize())
+                .totalRentalCnt(rental.getRentalItems().size())
+                .totalReturnCnt(rental.getReturnedItems().size())
                 .totalOverduedCnt(rental.getOverdueItemSize())
                 .build();
     }
