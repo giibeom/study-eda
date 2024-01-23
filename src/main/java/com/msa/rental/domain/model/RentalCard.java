@@ -8,7 +8,12 @@ import com.msa.rental.domain.model.vo.RentalStatus;
 import com.msa.rental.domain.model.vo.ReturnedItem;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -16,26 +21,34 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static lombok.AccessLevel.PRIVATE;
+import static lombok.AccessLevel.PROTECTED;
 
+@Entity
+@NoArgsConstructor(access = PROTECTED)
 public class RentalCard {
 
     private static final int POINTS_PER_DELAYED_DAY = 10;
 
     @Getter
+    @EmbeddedId
     private RentalCardNo rentalCardNo;
 
     @Getter
+    @Embedded
     private IDName member;
 
     @Getter
     private RentalStatus rentalStatus;
 
     @Getter
+    @Embedded
     private LateFee lateFee;
 
+    @ElementCollection
     private final List<RentalItem> rentalItems = new ArrayList<>();
 
     @Getter
+    @ElementCollection
     private final List<ReturnedItem> returnedItems = new ArrayList<>();
 
     @Builder(access = PRIVATE)

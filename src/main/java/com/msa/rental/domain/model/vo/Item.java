@@ -3,13 +3,20 @@ package com.msa.rental.domain.model.vo;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Embeddable;
+
+import static lombok.AccessLevel.PROTECTED;
 
 @Getter
 @EqualsAndHashCode
+@NoArgsConstructor(access = PROTECTED)
+@Embeddable
 public class Item {
 
-    private final int no;
-    private final String title;
+    private int no;
+    private String title;
 
     @Builder
     public Item(int no, String title) {

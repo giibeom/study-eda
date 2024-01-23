@@ -3,16 +3,23 @@ package com.msa.rental.domain.model;
 import com.msa.rental.domain.model.vo.Item;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.time.LocalDate;
 
 import static lombok.AccessLevel.PRIVATE;
+import static lombok.AccessLevel.PROTECTED;
 
+@NoArgsConstructor(access = PROTECTED)
+@Embeddable
 public class RentalItem {
 
     private static final int DEFAULT_RENTAL_PERIOD = 14;
 
     @Getter
+    @Embedded
     private Item item;
 
     @Getter
