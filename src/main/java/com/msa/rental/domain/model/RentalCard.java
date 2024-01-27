@@ -14,12 +14,14 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static javax.persistence.EnumType.STRING;
 import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
@@ -38,6 +40,7 @@ public class RentalCard {
     private IDName member;
 
     @Getter
+    @Enumerated(STRING)
     private RentalStatus rentalStatus;
 
     @Getter

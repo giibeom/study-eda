@@ -17,7 +17,6 @@ import static lombok.AccessLevel.PROTECTED;
 @Embeddable
 public class RentalCardNo implements Serializable {
 
-    private static final long serialVersionUID = -1107620421081907987L;
     private String no;
 
     public RentalCardNo(String no) {

@@ -5,14 +5,17 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Access;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import java.time.LocalDate;
 
+import static javax.persistence.AccessType.FIELD;
 import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
 @NoArgsConstructor(access = PROTECTED)
+@Access(FIELD)
 @Embeddable
 public class RentalItem {
 

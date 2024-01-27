@@ -5,13 +5,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Access;
 import javax.persistence.Embeddable;
 
+import static javax.persistence.AccessType.FIELD;
 import static lombok.AccessLevel.PROTECTED;
 
 @Getter
 @EqualsAndHashCode
 @NoArgsConstructor(access = PROTECTED)
+@Access(FIELD)
 @Embeddable
 public class Item {
 
